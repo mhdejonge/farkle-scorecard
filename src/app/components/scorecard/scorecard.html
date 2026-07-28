@@ -1,5 +1,5 @@
 <mat-toolbar color="primary" class="scorecard-toolbar">
-  <span>Farkle Scorecard</span>
+  <span class="scorecard-title">Farkle Scorecard</span>
   <span class="spacer"></span>
   <button mat-icon-button (click)="openNewGameDialog()">
     <mat-icon>refresh</mat-icon>
@@ -9,26 +9,22 @@
 <div class="scorecard-container">
   @if (scoreCard$ | async; as scoreCard) {
     <mat-card class="scorecard">
-      <mat-card-header>
-        <mat-card-title>Game Scorecard</mat-card-title>
-      </mat-card-header>
       <mat-card-content>
         <mat-list>
-          <h3 mat-subheader>Previous Turns</h3>
-          @for (score of scoreCard.turns; track $index) {
+          @for (score of scoreCard.turns; track score) {
             <mat-list-item>
-              <span matListItemTitle>Turn {{ $index + 1 }}</span>
-              <span matListItemLine>{{ score }} points</span>
+              <span matListItemLine>{{ score }}</span>
             </mat-list-item>
           }
           <mat-divider></mat-divider>
           <mat-list-item class="total-score">
-            <span matListItemTitle class="total-label">Total Score</span>
-            <span class="total-value">{{ scoreCard.total }}</span>
+            <span matListItemTitle class="total-label">Total:
+              &nbsp;
+              <span class="total-value">{{ scoreCard.total }}</span>
+            </span>
           </mat-list-item>
         </mat-list>
       </mat-card-content>
     </mat-card>
   }
 </div>
-

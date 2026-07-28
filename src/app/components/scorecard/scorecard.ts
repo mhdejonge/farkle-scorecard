@@ -1,6 +1,5 @@
-import { Component, OnInit, ChangeDetectionStrategy } from '@angular/core';
+import { ChangeDetectionStrategy, Component, OnInit } from '@angular/core';
 import { CommonModule } from '@angular/common';
-import { Router } from '@angular/router';
 import { MatCardModule } from '@angular/material/card';
 import { MatListModule } from '@angular/material/list';
 import { MatDividerModule } from '@angular/material/divider';
@@ -22,11 +21,7 @@ import { ConfirmDialogComponent } from '../confirm-dialog/confirm-dialog';
 export class ScorecardComponent implements OnInit {
   scoreCard$: Observable<ScoreCard>;
 
-  constructor(
-    private gameService: GameService,
-    private router: Router,
-    private dialog: MatDialog,
-  ) {
+  constructor(private gameService: GameService, private dialog: MatDialog) {
     this.scoreCard$ = this.gameService.scoreCard$;
   }
 
@@ -36,15 +31,13 @@ export class ScorecardComponent implements OnInit {
     const dialogRef = this.dialog.open(ConfirmDialogComponent, {
       data: {
         title: 'Start New Game?',
-        message:
-          'Are you sure you want to start a new game? All previous scores will be discarded.',
+        message: 'Are you sure you want to start a new game?'
       },
+      autoFocus: false
     });
-
     dialogRef.afterClosed().subscribe((result) => {
       if (result) {
         this.gameService.newGame();
-        this.router.navigate(['/scorecard']);
       }
     });
   }
