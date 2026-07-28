@@ -10,16 +10,20 @@
   </mat-card>
 
   <div class="scoring-buttons">
-    <button
-      *ngFor="let option of scoringOptions"
-      mat-raised-button
-      color="accent"
-      class="scoring-btn"
-      (click)="addScore(option)"
-    >
-      {{ option.label }}
-      <span class="points-badge">{{ option.points }}</span>
-    </button>
+    @for (option of scoringOptions; track $index) {
+      <div>
+        <button
+          mat-raised-button
+          color="accent"
+          class="scoring-btn"
+          (click)="addScore(option)">
+          {{ option.label }}
+          @if (option.points > 0) {
+            <span class="points-badge">{{ option.points }}</span>
+          }
+        </button>
+      </div>
+    }
   </div>
 
   <div class="action-buttons">
