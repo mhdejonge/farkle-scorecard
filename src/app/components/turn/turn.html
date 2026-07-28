@@ -1,0 +1,34 @@
+<div class="turn-container">
+  <mat-card class="current-score-card">
+    <mat-card-header>
+      <mat-card-title>Current Turn Score</mat-card-title>
+    </mat-card-header>
+    <mat-card-content class="current-score">
+      <div class="score-value">{{ currentTurnScore$ | async }}</div>
+      <div class="score-label">Points</div>
+    </mat-card-content>
+  </mat-card>
+
+  <div class="scoring-buttons">
+    <button
+      *ngFor="let option of scoringOptions"
+      mat-raised-button
+      color="accent"
+      class="scoring-btn"
+      (click)="addScore(option)"
+    >
+      {{ option.label }}
+      <span class="points-badge">{{ option.points }}</span>
+    </button>
+  </div>
+
+  <div class="action-buttons">
+    <button mat-raised-button color="primary" (click)="bankTurn()" class="action-btn">
+      Bank
+    </button>
+    <button mat-raised-button color="warn" (click)="farkle()" class="action-btn">
+      Farkle
+    </button>
+  </div>
+</div>
+
