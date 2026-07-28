@@ -4,7 +4,7 @@
 }
 
 .current-score-card {
-  margin-bottom: 30px;
+  margin-bottom: 15px;
   text-align: center;
 }
 
@@ -13,18 +13,18 @@
   flex-direction: column;
   align-items: center;
   justify-content: center;
-  padding: 30px 0;
+  padding: 15px 0;
 }
 
 .score-value {
-  font-size: 4em;
+  font-size: 2.5em;
   font-weight: bold;
   color: #1976d2;
-  margin-bottom: 10px;
+  margin-bottom: 5px;
 }
 
 .score-label {
-  font-size: 1.2em;
+  font-size: 0.9em;
   color: #666;
 }
 
@@ -38,8 +38,8 @@
 .scoring-btn {
   position: relative;
   height: auto;
-  padding: 12px 8px;
-  font-size: 0.9em;
+  padding: 8px 4px;
+  font-size: 0.75em;
   word-break: break-word;
   white-space: normal;
   width: 100%;
@@ -50,8 +50,8 @@
 
   .points-badge {
     display: block;
-    font-size: 0.8em;
-    margin-top: 4px;
+    font-size: 0.7em;
+    margin-top: 2px;
     font-weight: bold;
   }
 }
@@ -59,27 +59,44 @@
 .action-buttons {
   display: grid;
   grid-template-columns: repeat(2, 1fr);
-  gap: 15px;
-  margin-top: 20px;
+  gap: 10px;
+  margin-top: 10px;
 }
 
 .action-btn {
-  height: 50px;
-  font-size: 1.1em;
+  height: 40px;
+  font-size: 0.9em;
 }
 
-@media (max-width: 480px) {
-  .scoring-buttons {
-    grid-template-columns: repeat(2, 1fr);
-    gap: 8px;
+.bank-btn {
+  color: #4caf50;
+  font-weight: bold;
+  font-size: 1.25em !important;
+}
+
+.farkle-btn {
+  color: #f44336;
+  font-weight: bold;
+  font-size: 1.25em !important;
+}
+
+@media (min-height: 800px) {
+  .score-value {
+    font-size: 3.5em;
+    margin-bottom: 8px;
   }
 
-  .score-value {
-    font-size: 3em;
+  .score-label {
+    font-size: 1.1em;
   }
 
   .scoring-btn {
     padding: 10px 6px;
     font-size: 0.85em;
+  }
+
+  .action-btn {
+    height: 45px;
+    font-size: 1em;
   }
 }

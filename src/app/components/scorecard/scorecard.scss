@@ -1,6 +1,15 @@
+.scorecard-toolbar {
+  margin-bottom: 20px;
+}
+
+.spacer {
+  flex: 1 1 auto;
+}
+
 .scorecard-container {
   max-width: 600px;
   margin: 0 auto;
+  padding: 0 20px;
 }
 
 .scorecard {

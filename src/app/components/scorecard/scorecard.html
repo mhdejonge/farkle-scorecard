@@ -1,3 +1,11 @@
+<mat-toolbar color="primary" class="scorecard-toolbar">
+  <span>Farkle Scorecard</span>
+  <span class="spacer"></span>
+  <button mat-icon-button (click)="openNewGameDialog()">
+    <mat-icon>refresh</mat-icon>
+  </button>
+</mat-toolbar>
+
 <div class="scorecard-container">
   @if (scoreCard$ | async; as scoreCard) {
     <mat-card class="scorecard">

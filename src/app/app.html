@@ -1,22 +1,14 @@
-<mat-toolbar color="primary">
-  <span>Farkle Scorecard</span>
-  <span class="spacer"></span>
-  <button mat-icon-button (click)="openNewGameDialog()">
-    <mat-icon>refresh</mat-icon>
-  </button>
-</mat-toolbar>
-
 <div class="container">
   <router-outlet></router-outlet>
 </div>
 
 <nav class="bottom-nav">
-  <button mat-button class="nav-button" (click)="navigateTo('/scorecard')">
+  <a mat-button routerLink="/scorecard" class="nav-button">
     <mat-icon>receipt</mat-icon>
     <span>Scorecard</span>
-  </button>
-  <button mat-button class="nav-button" (click)="navigateTo('/turn')">
+  </a>
+  <a mat-button routerLink="/turn" class="nav-button">
     <mat-icon>videogame_asset</mat-icon>
     <span>Play Turn</span>
-  </button>
+  </a>
 </nav>
