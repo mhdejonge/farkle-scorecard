@@ -8,7 +8,7 @@ import { MatButtonModule } from '@angular/material/button';
 import { MatIconModule } from '@angular/material/icon';
 import { MatDialog } from '@angular/material/dialog';
 import { GameService } from '@app/services';
-import { ConfirmDialogComponent } from '../confirm-dialog/confirm-dialog';
+import { ConfirmDialogComponent } from '@app/components/confirm-dialog';
 
 @Component({
   selector: 'app-scorecard',
