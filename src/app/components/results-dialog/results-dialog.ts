@@ -2,12 +2,7 @@ import { Component, Inject, OnInit } from '@angular/core';
 import { CommonModule } from '@angular/common';
 import { MAT_DIALOG_DATA, MatDialogModule } from '@angular/material/dialog';
 import { MatButtonModule } from '@angular/material/button';
-
-export interface ResultsDialogData {
-  type: 'bank' | 'farkle' | 'frf';
-
-  points?: number;
-}
+import { getMessage, ResultsDialogData } from './results-dialog-data';
 
 @Component({
   selector: 'app-results-dialog',
@@ -26,21 +21,19 @@ export class ResultsDialogComponent implements OnInit {
 
   ngOnInit(): void {
     this.isBanking = this.data.type === 'bank';
+    this.description = getMessage(this.data);
     switch (this.data.type) {
       case 'bank':
         this.title = 'Banked!';
-        this.description = `You banked ${this.data.points} points!`;
         this.pointsDisplay = `+${this.data.points}`;
         break;
       case 'farkle':
         this.title = 'Farkle!';
         this.pointsDisplay = '+0';
-        this.description = `You'll get nothing and like it.`
         break;
       case 'frf':
         this.title = 'First Roll Farkle!';
-        this.pointsDisplay = '-1000';
-        this.description = 'You lose 1000 points!';
+        this.pointsDisplay = this.data.points.toString();
         break;
     }
   }

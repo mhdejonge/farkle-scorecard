@@ -43,9 +43,9 @@ export class TurnComponent {
   }
 
   farkle(): void {
-    const isFirstRollFarkle = this.gameService.farkle();
+    const farkleData = this.gameService.farkle();
     const dialog = this.dialog.open(ResultsDialogComponent, {
-      data: { type: isFirstRollFarkle ? 'frf' : 'farkle' },
+      data: farkleData,
       width: '400px',
       disableClose: true
     });
