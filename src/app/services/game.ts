@@ -10,8 +10,6 @@ export class GameService {
   scoreCard = signal(this.loadScoreCard());
   currentTurnScore = signal(emptyScoreCard());
 
-  constructor() {}
-
   private loadScoreCard(): ScoreCard {
     const stored = localStorage.getItem(this.STORAGE_KEY);
     if (stored) {
@@ -20,7 +18,7 @@ export class GameService {
     return emptyScoreCard();
   }
 
-  private saveScoreCard(scoreCard: ScoreCard): void {
+  saveScoreCard(scoreCard: ScoreCard): void {
     localStorage.setItem(this.STORAGE_KEY, JSON.stringify(scoreCard));
     this.scoreCard.set(scoreCard);
   }

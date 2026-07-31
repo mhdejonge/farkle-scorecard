@@ -1,6 +1,11 @@
 <mat-toolbar color="primary" class="scorecard-toolbar">
   <span class="scorecard-title">Farkle Scorecard</span>
   <span class="spacer"></span>
+  @if (!isEditMode()) {
+    <button mat-icon-button (click)="enterEditMode()" matTooltip="Edit scorecard">
+      <mat-icon>edit</mat-icon>
+    </button>
+  }
   <button mat-icon-button (click)="openNewGameDialog()">
     <mat-icon>refresh</mat-icon>
   </button>
@@ -10,19 +15,50 @@
   <mat-card class="scorecard">
     <mat-card-content>
       <mat-list>
-        @for (score of gameService.scoreCard().turns; track score) {
-          <mat-list-item>
-            <span matListItemLine>{{ score }}</span>
-          </mat-list-item>
+        @if (isEditMode()) {
+          @for (_t of editableTurns(); let i = $index; track i) {
+            <mat-list-item class="edit-item">
+              <div class="edit-row">
+                <input type="number" [(ngModel)]="editableTurns()[i]" class="turn-input" />
+                <button mat-icon-button (click)="removeTurn(i)" class="remove-btn">
+                  <mat-icon>delete</mat-icon>
+                </button>
+              </div>
+            </mat-list-item>
+          }
+        } @else {
+          @for (score of gameService.scoreCard().turns; track score) {
+            <mat-list-item>
+              <span matListItemLine>{{ score }}</span>
+            </mat-list-item>
+          }
         }
         <mat-divider></mat-divider>
         <mat-list-item class="total-score">
           <span matListItemTitle class="total-label">Total:
             &nbsp;
-            <span class="total-value">{{ gameService.scoreCard().total }}</span>
+            <span class="total-value">
+              @if (isEditMode()) {
+                {{ editableTotal() }}
+              } @else {
+                {{ gameService.scoreCard().total }}
+              }
+            </span>
           </span>
         </mat-list-item>
       </mat-list>
+      @if (isEditMode()) {
+        <div class="edit-actions">
+          <button mat-raised-button color="primary" (click)="saveScorecard()">
+            <mat-icon>save</mat-icon>
+            Save
+          </button>
+          <button mat-raised-button (click)="exitEditMode()">
+            <mat-icon>close</mat-icon>
+            Cancel
+          </button>
+        </div>
+      }
     </mat-card-content>
   </mat-card>
 </div>
