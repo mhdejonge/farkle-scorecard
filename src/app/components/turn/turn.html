@@ -7,17 +7,9 @@
   </mat-card>
   <div class="scoring-buttons">
     @for (option of scoringOptions; track $index) {
-      <div>
-        <button
-          matButton="outlined"
-          class="scoring-btn"
-          (click)="addScore(option)">
-          {{ option.label }}
-          @if (option.points > 0) {
-            <span class="points-badge">{{ option.points }}</span>
-          }
-        </button>
-      </div>
+      <button matButton="outlined" class="scoring-btn" (click)="addScore(option)">
+        {{ option.label }} ({{ option.points }})
+      </button>
     }
   </div>
   <div class="action-buttons">
