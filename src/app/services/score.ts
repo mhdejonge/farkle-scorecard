@@ -1,5 +1,15 @@
+export interface ScoreCard {
+  turns: number[];
+  total: number;
+}
+
+export function emptyScoreCard(): ScoreCard {
+  return { turns: [], total: 0 };
+}
+
 export interface ScoringOption {
   label: string;
+
   points: number;
 }
 
@@ -49,7 +59,11 @@ export const ScoringOptions: ScoringOption[] = [
     points: 3000
   },
   {
-    label: 'Straight (1-6)',
+    label: 'Straight (5 Dice)',
+    points: 750
+  },
+  {
+    label: 'Straight (6 Dice)',
     points: 1500
   },
   {

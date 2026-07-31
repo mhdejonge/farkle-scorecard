@@ -1,21 +1,14 @@
-import { Injectable } from '@angular/core';
-import { BehaviorSubject, Observable } from 'rxjs';
-
-export interface ScoreCard {
-  turns: number[];
-  total: number;
-}
+import { Injectable, signal, WritableSignal } from '@angular/core';
+import { emptyScoreCard, ScoreCard } from './score';
 
 @Injectable({
   providedIn: 'root',
 })
 export class GameService {
   private readonly STORAGE_KEY = 'farkle-scorecard';
-  private scoreCardSubject = new BehaviorSubject<ScoreCard>(this.loadScoreCard());
-  public scoreCard$ = this.scoreCardSubject.asObservable();
 
-  private currentTurnScoreSubject = new BehaviorSubject<number>(0);
-  public currentTurnScore$ = this.currentTurnScoreSubject.asObservable();
+  scoreCard = signal(this.loadScoreCard());
+  currentTurnScore = signal(emptyScoreCard());
 
   constructor() {}
 
@@ -24,43 +17,52 @@ export class GameService {
     if (stored) {
       return JSON.parse(stored);
     }
-    return { turns: [], total: 0 };
+    return emptyScoreCard();
   }
 
   private saveScoreCard(scoreCard: ScoreCard): void {
     localStorage.setItem(this.STORAGE_KEY, JSON.stringify(scoreCard));
-    this.scoreCardSubject.next(scoreCard);
+    this.scoreCard.set(scoreCard);
   }
 
   addToCurrentTurn(points: number): void {
-    const current = this.currentTurnScoreSubject.value;
-    this.currentTurnScoreSubject.next(current + points);
+    this.addToScoreCard(this.currentTurnScore, points);
   }
 
-  bankTurn(): void {
-    const currentScore = this.currentTurnScoreSubject.value;
-    const scoreCard = this.scoreCardSubject.value;
-    scoreCard.turns.push(currentScore);
-    scoreCard.total += currentScore;
-    this.saveScoreCard(scoreCard);
-    this.currentTurnScoreSubject.next(0);
+  bank(): void {
+    const turnScore = this.currentTurnScore().total;
+    this.addToScoreCard(this.scoreCard, turnScore);
+    this.currentTurnScore.set(emptyScoreCard());
   }
 
-  farkle(): void {
-    this.currentTurnScoreSubject.next(0);
+  farkle(): boolean {
+    const total = this.currentTurnScore().total;
+    this.currentTurnScore.set(emptyScoreCard());
+    const firstRollFarkle = total <= 0;
+    if (firstRollFarkle) {
+      this.addToScoreCard(this.scoreCard, -1000);
+    }
+    return firstRollFarkle;
+  }
+
+  undo(): void {
+    this.currentTurnScore.update(current => {
+      const turns = [...current.turns];
+      const last = turns.pop() ?? 0;
+      const total = current.total - last;
+      return { turns, total };
+    });
   }
 
   newGame(): void {
-    this.currentTurnScoreSubject.next(0);
-    const emptyScoreCard: ScoreCard = { turns: [], total: 0 };
-    this.saveScoreCard(emptyScoreCard);
+    this.saveScoreCard(emptyScoreCard());
+    this.currentTurnScore.set(emptyScoreCard());
   }
 
-  getCurrentTurnScore(): number {
-    return this.currentTurnScoreSubject.value;
-  }
-
-  getScoreCard(): ScoreCard {
-    return this.scoreCardSubject.value;
+  private addToScoreCard(scoreCard: WritableSignal<ScoreCard>, points: number): void {
+    scoreCard.update(current => ({
+      turns: [...current.turns, points],
+      total: current.total + points
+    }));
   }
 }

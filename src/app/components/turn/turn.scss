@@ -57,27 +57,21 @@
 }
 
 .action-buttons {
-  display: grid;
-  grid-template-columns: repeat(2, 1fr);
-  gap: 10px;
-  margin-top: 10px;
-}
-
-.action-btn {
-  height: 40px;
-  font-size: 0.9em;
+  button {
+    margin: 5px;
+    height: 40px;
+    width: 100%;
+    font-weight: bold;
+    font-size: 1.25em;
+  }
 }
 
 .bank-btn {
   color: #4caf50;
-  font-weight: bold;
-  font-size: 1.25em !important;
 }
 
 .farkle-btn {
   color: #f44336;
-  font-weight: bold;
-  font-size: 1.25em !important;
 }
 
 @media (min-height: 800px) {

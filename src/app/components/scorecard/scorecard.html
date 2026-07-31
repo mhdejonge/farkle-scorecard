@@ -7,24 +7,22 @@
 </mat-toolbar>
 
 <div class="scorecard-container">
-  @if (scoreCard$ | async; as scoreCard) {
-    <mat-card class="scorecard">
-      <mat-card-content>
-        <mat-list>
-          @for (score of scoreCard.turns; track score) {
-            <mat-list-item>
-              <span matListItemLine>{{ score }}</span>
-            </mat-list-item>
-          }
-          <mat-divider></mat-divider>
-          <mat-list-item class="total-score">
-            <span matListItemTitle class="total-label">Total:
-              &nbsp;
-              <span class="total-value">{{ scoreCard.total }}</span>
-            </span>
+  <mat-card class="scorecard">
+    <mat-card-content>
+      <mat-list>
+        @for (score of gameService.scoreCard().turns; track score) {
+          <mat-list-item>
+            <span matListItemLine>{{ score }}</span>
           </mat-list-item>
-        </mat-list>
-      </mat-card-content>
-    </mat-card>
-  }
+        }
+        <mat-divider></mat-divider>
+        <mat-list-item class="total-score">
+          <span matListItemTitle class="total-label">Total:
+            &nbsp;
+            <span class="total-value">{{ gameService.scoreCard().total }}</span>
+          </span>
+        </mat-list-item>
+      </mat-list>
+    </mat-card-content>
+  </mat-card>
 </div>
