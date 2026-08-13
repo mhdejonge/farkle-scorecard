@@ -19,9 +19,13 @@ export class GameService {
     return emptyScoreCard();
   }
 
+  private saveCurrentScoreCard(): void {
+    localStorage.setItem(this.STORAGE_KEY, JSON.stringify(this.scoreCard()));
+  }
+
   saveScoreCard(scoreCard: ScoreCard): void {
-    localStorage.setItem(this.STORAGE_KEY, JSON.stringify(scoreCard));
     this.scoreCard.set(scoreCard);
+    this.saveCurrentScoreCard();
   }
 
   addToCurrentTurn(points: number): void {
@@ -30,8 +34,9 @@ export class GameService {
 
   bank(): void {
     const turnScore = this.currentTurnScore().total;
-    this.addToScoreCard(this.scoreCard, turnScore);
     this.currentTurnScore.set(emptyScoreCard());
+    this.addToScoreCard(this.scoreCard, turnScore);
+    this.saveCurrentScoreCard();
   }
 
   farkle(): ResultsDialogData {
@@ -48,7 +53,7 @@ export class GameService {
   }
 
   undo(): void {
-    this.currentTurnScore.update(current => {
+    this.currentTurnScore.update((current) => {
       const turns = [...current.turns];
       const last = turns.pop() ?? 0;
       const total = current.total - last;
@@ -62,9 +67,9 @@ export class GameService {
   }
 
   private addToScoreCard(scoreCard: WritableSignal<ScoreCard>, points: number): void {
-    scoreCard.update(current => ({
+    scoreCard.update((current) => ({
       turns: [...current.turns, points],
-      total: current.total + points
+      total: current.total + points,
     }));
   }
 }
