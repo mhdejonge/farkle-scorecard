@@ -15,16 +15,16 @@ export interface ScoringOption {
 
 export const ScoringOptions: ScoringOption[] = [
   {
-    label: 'Single 1',
-    points: 100
-  },
-  {
     label: 'Single 5',
     points: 50
   },
   {
-    label: 'Single 1 and Single 5',
-    points: 150
+    label: 'Single 1',
+    points: 100
+  },
+  {
+    label: 'Two 1s',
+    points: 200
   },
   {
     label: 'Three 1s',
