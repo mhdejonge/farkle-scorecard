@@ -1,13 +1,34 @@
-<div class="container">
-  <router-outlet></router-outlet>
-</div>
+<mat-sidenav-container autosize>
+  <mat-sidenav #sidenav mode="side" position="start" (click)="sidenav.toggle(false)">
+    <a mat-button routerLink="/scorecard" class="menu-button">
+      <mat-icon>receipt</mat-icon>
+      <span>View Scorecard</span>
+    </a>
+    <button mat-button (click)="toggleEditMode()" class="menu-button">
+      <mat-icon>edit</mat-icon>
+      <span>Edit Scorecard</span>
+    </button>
+    <button mat-button (click)="openNewGameDialog()" class="menu-button">
+      <mat-icon>add_circle</mat-icon>
+      <span>New Game</span>
+    </button>
+    <button mat-button (click)="sidenav.toggle()" class="menu-button">
+      <mat-icon>close</mat-icon>
+      <span>Close</span>
+    </button>
+  </mat-sidenav>
+  <mat-sidenav-content>
+    <div class="container">
+      <router-outlet></router-outlet>
+    </div>
+  </mat-sidenav-content>
+</mat-sidenav-container>
 <nav class="bottom-nav">
-  <a mat-button routerLink="/scorecard" class="nav-button">
-    <mat-icon>receipt</mat-icon>
-    <span>Scorecard</span>
-  </a>
-  <a mat-button routerLink="/turn" class="nav-button">
+  <button mat-icon-button class="scorecard-button" (click)="sidenav.toggle()">
+    <mat-icon>menu</mat-icon>
+  </button>
+  <button mat-raised-button routerLink="/turn" class="play-button">
     <mat-icon>videogame_asset</mat-icon>
     <span>Play Turn</span>
-  </a>
+  </button>
 </nav>

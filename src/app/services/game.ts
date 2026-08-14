@@ -1,5 +1,6 @@
 import { Injectable, signal, WritableSignal } from '@angular/core';
 import { emptyScoreCard, ScoreCard } from './score';
+import { Subject } from 'rxjs';
 
 @Injectable({
   providedIn: 'root',
@@ -9,6 +10,7 @@ export class GameService {
 
   scoreCard = signal(this.loadScoreCard());
   currentTurnScore = signal(emptyScoreCard());
+  toggleEditMode = new Subject<void>();
 
   private loadScoreCard(): ScoreCard {
     const stored = localStorage.getItem(this.STORAGE_KEY);

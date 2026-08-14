@@ -1,16 +1,4 @@
-<mat-toolbar color="primary" class="scorecard-toolbar">
-  <span class="scorecard-title">Farkle Scorecard</span>
-  <span class="spacer"></span>
-  @if (!isEditMode()) {
-    <button mat-icon-button (click)="enterEditMode()" matTooltip="Edit scorecard">
-      <mat-icon>edit</mat-icon>
-    </button>
-  }
-  <button mat-icon-button (click)="openNewGameDialog()">
-    <mat-icon>refresh</mat-icon>
-  </button>
-</mat-toolbar>
-
+<h1 class="scorecard-title">Scorecard</h1>
 <div class="scorecard-container">
   <mat-card class="scorecard">
     <mat-card-content>
