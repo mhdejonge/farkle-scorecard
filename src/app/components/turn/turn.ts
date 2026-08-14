@@ -43,9 +43,9 @@ export class TurnComponent {
   }
 
   farkle(): void {
-    const farkleData = this.gameService.farkle();
+    this.gameService.farkle();
     const dialog = this.dialog.open(ResultsDialogComponent, {
-      data: farkleData,
+      data: { type: 'farkle', points: 0 },
       width: '400px',
       disableClose: true
     });
@@ -57,8 +57,7 @@ export class TurnComponent {
   }
 
   finished(dialog: MatDialogRef<ResultsDialogComponent>): void {
-    this.finishedSignal.set(true);
-    timer(5000).pipe(switchMap(() => {
+    this.finishedSignal.set(true);timer(5000).pipe(switchMap(() => {
       dialog.close();
       return this.router.navigate(['/scorecard']);
     })).subscribe();

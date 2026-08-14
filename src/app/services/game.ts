@@ -1,6 +1,5 @@
 import { Injectable, signal, WritableSignal } from '@angular/core';
 import { emptyScoreCard, ScoreCard } from './score';
-import { ResultsDialogData } from '@app/components/results-dialog';
 
 @Injectable({
   providedIn: 'root',
@@ -39,17 +38,8 @@ export class GameService {
     this.saveCurrentScoreCard();
   }
 
-  farkle(): ResultsDialogData {
-    const total = this.currentTurnScore().total;
+  farkle(): void {
     this.currentTurnScore.set(emptyScoreCard());
-    const firstRollFarkle = total <= 0;
-    const firstRollFarklePoints = -1000;
-    if (firstRollFarkle) {
-      this.addToScoreCard(this.scoreCard, firstRollFarklePoints);
-      return { type: 'frf', points: firstRollFarklePoints };
-    } else {
-      return { type: 'farkle', points: 0 };
-    }
   }
 
   undo(): void {

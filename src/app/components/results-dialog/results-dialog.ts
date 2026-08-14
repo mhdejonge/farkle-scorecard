@@ -29,11 +29,7 @@ export class ResultsDialogComponent implements OnInit {
         break;
       case 'farkle':
         this.title = 'Farkle!';
-        this.pointsDisplay = '+0';
-        break;
-      case 'frf':
-        this.title = 'First Roll Farkle!';
-        this.pointsDisplay = this.data.points.toString();
+        this.pointsDisplay = '0';
         break;
     }
   }

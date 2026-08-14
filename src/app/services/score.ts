@@ -23,6 +23,10 @@ export const ScoringOptions: ScoringOption[] = [
     points: 50
   },
   {
+    label: 'Single 1 and Single 5',
+    points: 150
+  },
+  {
     label: 'Three 1s',
     points: 300
   },
@@ -47,10 +51,6 @@ export const ScoringOptions: ScoringOption[] = [
     points: 600
   },
   {
-    label: 'Three of a Kind and a Pair',
-    points: 700
-  },
-  {
     label: 'Four of a Kind',
     points: 1000
   },
@@ -63,11 +63,11 @@ export const ScoringOptions: ScoringOption[] = [
     points: 3000
   },
   {
-    label: 'Straight - 5 Dice',
-    points: 750
+    label: 'Straight 1 - 6',
+    points: 1500
   },
   {
-    label: 'Straight - 6 Dice',
+    label: 'Four of a Kind and a Pair',
     points: 1500
   },
   {
