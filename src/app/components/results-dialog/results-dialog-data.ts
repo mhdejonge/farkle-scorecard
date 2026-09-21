@@ -20,7 +20,9 @@ const BANKING_HIGH = [
   `The house safe is for brandy and grandmother's pearls.`,
   'Who is this guy?!',
   `I'd like to personally show you, my ass.`,
-  'Waiting on you now.'
+  'Waiting on you now.',
+  `Sometimes My Genius Is... It's Almost Frightening.`,
+  'Shaka! Shaka! Shaka!'
 ] as const;
 
 const FARKLE = [
